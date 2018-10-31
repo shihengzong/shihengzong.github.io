@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>ngix 基本使用 | Seeu&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 启动ngix#####windows下启动    cd nginx14-04    //进入目录    start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 #####配置123456789101112131415161718192021ser">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ngix 基本使用">
+<meta property="og:url" content="http://yoursite.com/2018/10/30/nginx基本使用/index.html">
+<meta property="og:site_name" content="Seeu&#39;s Blog">
+<meta property="og:description" content="1. 启动ngix#####windows下启动    cd nginx14-04    //进入目录    start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 #####配置123456789101112131415161718192021ser">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-31T09:23:16.735Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ngix 基本使用">
+<meta name="twitter:description" content="1. 启动ngix#####windows下启动    cd nginx14-04    //进入目录    start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 #####配置123456789101112131415161718192021ser">
+<meta name="twitter:creator" content="@coolwuxing">
+  
+    <link rel="alternative" href="/atom.xml" title="Seeu&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43935113-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Seeu&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main"><article id="post-nginx基本使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/30/nginx基本使用/" class="article-date">
+  <time datetime="2018-10-30T03:19:38.000Z" itemprop="datePublished">2018-10-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ngix 基本使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-启动ngix"><a href="#1-启动ngix" class="headerlink" title="1. 启动ngix"></a>1. 启动ngix</h4><p>#####windows下启动<br>    cd nginx14-04    //进入目录<br>    start nginx</p>
+<p>#####linux下启动<br>    cd nginx14-04    //进入目录<br>    nginx</p>
+<h4 id="2-反向代理"><a href="#2-反向代理" class="headerlink" title="2. 反向代理"></a>2. 反向代理</h4><p>nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器</p>
+<p>#####配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       81;                #监听端口(localhost:81)</span><br><span class="line">       server_name  localhost;</span><br><span class="line">       location / &#123;                    #/表示匹配所有  转发到 http://127.0.0.1:9999</span><br><span class="line">           proxy_pass   http://127.0.0.1:9999;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br><span class="line">       location /v1 &#123;                  #localhost:81/v1 转发到 http://127.0.0.1:9982</span><br><span class="line">           proxy_pass   http://127.0.0.1:9982;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2. 负载均衡"></a>2. 负载均衡</h4><p>将同一任务的多次请求分摊到不同的服务器上,达到资源有效合理分配</p>
+<pre><code>upstream mysvr { 
+    server 127.0.0.1:7878 weight=1;
+    server 192.168.10.121:3333 weight=2;
+}
+</code></pre><p>weight: 加权轮询   按照abb abb abb 的循环去分配请求</p>
+<h4 id="3-关闭nginx"><a href="#3-关闭nginx" class="headerlink" title="3. 关闭nginx"></a>3. 关闭nginx</h4><pre><code>cd nginx14-04
+nginx -s stop
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjnwygias00007knopjf3sv3i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/29/markdown/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">markdown语法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/30/nginx基本使用/">ngix 基本使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/29/markdown/">markdown语法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/29/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id="foot-stars"></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 seeu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

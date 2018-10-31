@@ -3,15 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Seeu&#39;s Blog</title>
+  <title>markdown语法 | Seeu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Seeu&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="1.兼容html例: &amp;lt;table&amp;gt;     &amp;lt;tr&amp;gt;         &amp;lt;td&amp;gt;Foo&amp;lt;/td&amp;gt;     &amp;lt;/tr&amp;gt; &amp;lt;/table&amp;gt; 效果为:             Foo       2.标题--(1).下划线 This is an H1 =============  This is an H2 ------------">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown语法">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/markdown/index.html">
 <meta property="og:site_name" content="Seeu&#39;s Blog">
+<meta property="og:description" content="1.兼容html例: &amp;lt;table&amp;gt;     &amp;lt;tr&amp;gt;         &amp;lt;td&amp;gt;Foo&amp;lt;/td&amp;gt;     &amp;lt;/tr&amp;gt; &amp;lt;/table&amp;gt; 效果为:             Foo       2.标题--(1).下划线 This is an H1 =============  This is an H2 ------------">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-30T03:20:37.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Seeu&#39;s Blog">
+<meta name="twitter:title" content="markdown语法">
+<meta name="twitter:description" content="1.兼容html例: &amp;lt;table&amp;gt;     &amp;lt;tr&amp;gt;         &amp;lt;td&amp;gt;Foo&amp;lt;/td&amp;gt;     &amp;lt;/tr&amp;gt; &amp;lt;/table&amp;gt; 效果为:             Foo       2.标题--(1).下划线 This is an H1 =============  This is an H2 ------------">
 <meta name="twitter:creator" content="@coolwuxing">
   
     <link rel="alternative" href="/atom.xml" title="Seeu&#39;s Blog" type="application/atom+xml">
@@ -76,57 +80,7 @@ ga('send', 'pageview');
   </div>
 </div>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-nginx基本使用" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/30/nginx基本使用/" class="article-date">
-  <time datetime="2018-10-30T03:19:38.000Z" itemprop="datePublished">2018-10-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/30/nginx基本使用/">ngix 基本使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-启动ngix"><a href="#1-启动ngix" class="headerlink" title="1. 启动ngix"></a>1. 启动ngix</h4><p>#####windows下启动<br>    cd nginx14-04    //进入目录<br>    start nginx</p>
-<p>#####linux下启动<br>    cd nginx14-04    //进入目录<br>    nginx</p>
-<h4 id="2-反向代理"><a href="#2-反向代理" class="headerlink" title="2. 反向代理"></a>2. 反向代理</h4><p>nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器</p>
-<p>#####配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       81;                #监听端口(localhost:81)</span><br><span class="line">       server_name  localhost;</span><br><span class="line">       location / &#123;                    #/表示匹配所有  转发到 http://127.0.0.1:9999</span><br><span class="line">           proxy_pass   http://127.0.0.1:9999;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br><span class="line">       location /v1 &#123;                  #localhost:81/v1 转发到 http://127.0.0.1:9982</span><br><span class="line">           proxy_pass   http://127.0.0.1:9982;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2. 负载均衡"></a>2. 负载均衡</h4><p>将同一任务的多次请求分摊到不同的服务器上,达到资源有效合理分配</p>
-<pre><code>upstream mysvr { 
-    server 127.0.0.1:7878 weight=1;
-    server 192.168.10.121:3333 weight=2;
-}
-</code></pre><p>weight: 加权轮询   按照abb abb abb 的循环去分配请求</p>
-<h4 id="3-关闭nginx"><a href="#3-关闭nginx" class="headerlink" title="3. 关闭nginx"></a>3. 关闭nginx</h4><pre><code>cd nginx14-04
-nginx -s stop
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjnwygias00007knopjf3sv3i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-markdown" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-markdown" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/29/markdown/" class="article-date">
   <time datetime="2018-10-29T05:27:40.000Z" itemprop="datePublished">2018-10-29</time>
@@ -139,8 +93,8 @@ nginx -s stop
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/29/markdown/">markdown语法</a>
+    <h1 class="article-title" itemprop="name">
+      markdown语法
     </h1>
   
 
@@ -251,56 +205,29 @@ __double underscores__
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/29/hello-world/" class="article-date">
-  <time datetime="2018-10-29T03:42:32.896Z" itemprop="datePublished">2018-10-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2018/10/30/nginx基本使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          ngix 基本使用
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/29/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2018/10/29/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/hello-world/" data-id="cjnwygiax00017kno6405wcts" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">
