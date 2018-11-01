@@ -5,17 +5,17 @@
   
   <title>nginx 基本使用 | Seeu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 启动ngix#####windows下启动    cd nginx14-04    //进入目录    start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 #####配置123456789101112131415161718192021ser">
+  <meta name="description" content="1. 启动ngixwindows下启动cd nginx14-04    //进入目录 start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 配置123456789101112131415161718192021server &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx 基本使用">
 <meta property="og:url" content="http://yoursite.com/2018/10/30/nginx基本使用/index.html">
 <meta property="og:site_name" content="Seeu&#39;s Blog">
-<meta property="og:description" content="1. 启动ngix#####windows下启动    cd nginx14-04    //进入目录    start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 #####配置123456789101112131415161718192021ser">
+<meta property="og:description" content="1. 启动ngixwindows下启动cd nginx14-04    //进入目录 start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 配置123456789101112131415161718192021server &amp;#123;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-01T03:19:45.354Z">
+<meta property="og:updated_time" content="2018-11-01T05:36:13.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx 基本使用">
-<meta name="twitter:description" content="1. 启动ngix#####windows下启动    cd nginx14-04    //进入目录    start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 #####配置123456789101112131415161718192021ser">
+<meta name="twitter:description" content="1. 启动ngixwindows下启动cd nginx14-04    //进入目录 start nginx #####linux下启动    cd nginx14-04    //进入目录    nginx 2. 反向代理nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器 配置123456789101112131415161718192021server &amp;#123;">
 <meta name="twitter:creator" content="@coolwuxing">
   
     <link rel="alternative" href="/atom.xml" title="Seeu&#39;s Blog" type="application/atom+xml">
@@ -102,10 +102,11 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-启动ngix"><a href="#1-启动ngix" class="headerlink" title="1. 启动ngix"></a>1. 启动ngix</h4><p>#####windows下启动<br>    cd nginx14-04    //进入目录<br>    start nginx</p>
-<p>#####linux下启动<br>    cd nginx14-04    //进入目录<br>    nginx</p>
+        <h4 id="1-启动ngix"><a href="#1-启动ngix" class="headerlink" title="1. 启动ngix"></a>1. 启动ngix</h4><h5 id="windows下启动"><a href="#windows下启动" class="headerlink" title="windows下启动"></a>windows下启动</h5><pre><code>cd nginx14-04    //进入目录
+start nginx
+</code></pre><p>#####linux下启动<br>    cd nginx14-04    //进入目录<br>    nginx</p>
 <h4 id="2-反向代理"><a href="#2-反向代理" class="headerlink" title="2. 反向代理"></a>2. 反向代理</h4><p>nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器</p>
-<p>#####配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       81;                #监听端口(localhost:81)</span><br><span class="line">       server_name  localhost;</span><br><span class="line">       location / &#123;                    #/表示匹配所有  转发到 http://127.0.0.1:9999</span><br><span class="line">           proxy_pass   http://127.0.0.1:9999;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br><span class="line">       location /v1 &#123;                  #localhost:81/v1 转发到 http://127.0.0.1:9982</span><br><span class="line">           proxy_pass   http://127.0.0.1:9982;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       81;                #监听端口(localhost:81)</span><br><span class="line">       server_name  localhost;</span><br><span class="line">       location / &#123;                    #/表示匹配所有  转发到 http://127.0.0.1:9999</span><br><span class="line">           proxy_pass   http://127.0.0.1:9999;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br><span class="line">       location /v1 &#123;                  #localhost:81/v1 转发到 http://127.0.0.1:9982</span><br><span class="line">           proxy_pass   http://127.0.0.1:9982;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2. 负载均衡"></a>2. 负载均衡</h4><p>将同一任务的多次请求分摊到不同的服务器上,达到资源有效合理分配</p>
 <pre><code>upstream mysvr { 
     server 127.0.0.1:7878 weight=1;
@@ -118,7 +119,7 @@ nginx -s stop
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjny5mbg900047knoiqbio47d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjny7bc4t00057cnozz4dzqyg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +162,7 @@ nginx -s stop
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -177,6 +178,10 @@ nginx -s stop
           </li>
         
           <li>
+            <a href="/2018/11/01/http请求方式/">Git 和 github 使用</a>
+          </li>
+        
+          <li>
             <a href="/2018/11/01/golang安装与使用/">golang安装与使用</a>
           </li>
         
@@ -186,10 +191,6 @@ nginx -s stop
         
           <li>
             <a href="/2018/10/29/markdown语法/">markdown语法</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/29/hello-world/">Hello World</a>
           </li>
         
       </ul>
