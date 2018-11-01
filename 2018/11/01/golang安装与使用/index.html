@@ -3,15 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Archives | Seeu&#39;s Blog</title>
+  <title>golang安装与使用 | Seeu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Seeu&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="1. 下载golang安装包下载 msi 安装后自动配置环境变量 继续设置   GoPath: D:\go       //工作目录            GoRoot: C:\Go\      // go的安装目录 2. 安装beego框架12$ go get -u github.com/astaxie/beego  $ go get -u github.com/beego/bee src目录下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang安装与使用">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/golang安装与使用/index.html">
 <meta property="og:site_name" content="Seeu&#39;s Blog">
+<meta property="og:description" content="1. 下载golang安装包下载 msi 安装后自动配置环境变量 继续设置   GoPath: D:\go       //工作目录            GoRoot: C:\Go\      // go的安装目录 2. 安装beego框架12$ go get -u github.com/astaxie/beego  $ go get -u github.com/beego/bee src目录下">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-01T05:32:36.310Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Seeu&#39;s Blog">
+<meta name="twitter:title" content="golang安装与使用">
+<meta name="twitter:description" content="1. 下载golang安装包下载 msi 安装后自动配置环境变量 继续设置   GoPath: D:\go       //工作目录            GoRoot: C:\Go\      // go的安装目录 2. 安装beego框架12$ go get -u github.com/astaxie/beego  $ go get -u github.com/beego/bee src目录下">
 <meta name="twitter:creator" content="@coolwuxing">
   
     <link rel="alternative" href="/atom.xml" title="Seeu&#39;s Blog" type="application/atom+xml">
@@ -76,115 +80,70 @@ ga('send', 'pageview');
   </div>
 </div>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/01/Git 和 github 使用/" class="archive-article-date">
-  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">Nov 1</time>
+        <section id="main"><article id="post-golang安装与使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/golang安装与使用/" class="article-date">
+  <time datetime="2018-11-01T03:18:55.000Z" itemprop="datePublished">2018-11-01</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
+    <h1 class="article-title" itemprop="name">
+      golang安装与使用
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/01/golang安装与使用/" class="archive-article-date">
-  <time datetime="2018-11-01T03:18:55.000Z" itemprop="datePublished">Nov 1</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/golang安装与使用/">golang安装与使用</a>
-    </h1>
-  
+        <h3 id="1-下载golang安装包"><a href="#1-下载golang安装包" class="headerlink" title="1. 下载golang安装包"></a>1. 下载golang安装包</h3><p><a href="https://www.golangtc.com/download" target="_blank" rel="noopener">下载</a> msi 安装后自动配置环境变量</p>
+<pre><code>继续设置   GoPath: D:\go       //工作目录
+           GoRoot: C:\Go\      // go的安装目录
+</code></pre><h3 id="2-安装beego框架"><a href="#2-安装beego框架" class="headerlink" title="2. 安装beego框架"></a>2. 安装beego框架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go get -u github.com/astaxie/beego  </span><br><span class="line">$ go get -u github.com/beego/bee</span><br></pre></td></tr></table></figure>
+<pre><code>src目录下执行 ---&gt;  $ go install github.com/beego/bee  (安装bee工具)  
+---&gt; gopath目录下会出现bin目录,里面包含 bee.exe      
+环境变量配置:   path: src/bin
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bee new hello   ---&gt;  生成src文件  ---&gt; 存放源码</span><br><span class="line">$ bee run hello   ---&gt;  生成bin/pkg 文件</span><br><span class="line">$ bee version     ---&gt;  验证是否安装成功</span><br></pre></td></tr></table></figure>
+<h3 id="3-安装vscode工具"><a href="#3-安装vscode工具" class="headerlink" title="3. 安装vscode工具"></a>3. 安装vscode工具</h3><p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">下载</a>后一直继续,安装成功<br>点击最左边工具栏”拓展”图标(ctrl+shift+x),搜索Go,安装后重启</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/30/nginx基本使用/" class="archive-article-date">
-  <time datetime="2018-10-30T03:19:38.000Z" itemprop="datePublished">Oct 30</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/30/nginx基本使用/">nginx 基本使用</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/29/markdown语法/" class="archive-article-date">
-  <time datetime="2018-10-29T05:27:40.000Z" itemprop="datePublished">Oct 29</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/01/golang安装与使用/" data-id="cjny5mbg500017knoobpm70td" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/29/markdown语法/">markdown语法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/29/hello-world/" class="archive-article-date">
-  <time datetime="2018-10-29T03:42:32.896Z" itemprop="datePublished">Oct 29</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/11/01/Git 和 github 使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Git 和 github 使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/30/nginx基本使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">nginx 基本使用</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 </section>
         
           <aside id="sidebar">

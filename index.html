@@ -78,6 +78,95 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-Git 和 github 使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/Git 和 github 使用/" class="article-date">
+  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-下载Git"><a href="#1-下载Git" class="headerlink" title="1. 下载Git"></a>1. 下载Git</h3><p><a href="https://gitforwindows.org/" target="_blank" rel="noopener">下载</a>  默认安装</p>
+<h3 id="2-注册github账号"><a href="#2-注册github账号" class="headerlink" title="2. 注册github账号"></a>2. 注册github账号</h3><p><a href="https://github.com/join?source=login" target="_blank" rel="noopener">注册</a> 按步骤注册github账号</p>
+<h3 id="3-创建私钥"><a href="#3-创建私钥" class="headerlink" title="3. 创建私钥"></a>3. 创建私钥</h3><p>桌面右键,打开gitbash<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>后面的<a href="mailto:your_email@youremail.com" target="_blank" rel="noopener">your_email@youremail.com</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</p>
+<p>回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key</p>
+<h3 id="4-设置默认用户"><a href="#4-设置默认用户" class="headerlink" title="4. 设置默认用户"></a>4. 设置默认用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"your name"</span></span><br><span class="line">$ git config --global user.email <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-新建仓库"><a href="#5-新建仓库" class="headerlink" title="5. 新建仓库"></a>5. 新建仓库</h3><p>到github上 ,右上角 new repository 新建一个仓库<br>进到src 目录下执行  git clone htttp://github.com/xxxxx  (仓库的地址)<br>进到克隆的项目目录下, bee new “项目名”</p>
+<h3 id="6-上传到github"><a href="#6-上传到github" class="headerlink" title="6. 上传到github"></a>6. 上传到github</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">"first"</span></span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="7-git-常用命令"><a href="#7-git-常用命令" class="headerlink" title="7. git 常用命令"></a>7. git 常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b dev-zsh-seeu   //创建一个 dev-zsh-seeu 的开发分支</span><br><span class="line">$ git stash                      //把当前修改暂存</span><br><span class="line">$ git stash  pop                 //把暂存的修改取回来  </span><br><span class="line">$ git pull origin master         //把master分支的代码拉下来</span><br><span class="line">$ git checkout                   //放弃所有修改</span><br><span class="line">$ git branch -a                  //查看所有分支</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/01/Git 和 github 使用/" data-id="cjny5mbfx00007kno4cjye16z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-golang安装与使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/golang安装与使用/" class="article-date">
+  <time datetime="2018-11-01T03:18:55.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/golang安装与使用/">golang安装与使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-下载golang安装包"><a href="#1-下载golang安装包" class="headerlink" title="1. 下载golang安装包"></a>1. 下载golang安装包</h3><p><a href="https://www.golangtc.com/download" target="_blank" rel="noopener">下载</a> msi 安装后自动配置环境变量</p>
+<pre><code>继续设置   GoPath: D:\go       //工作目录
+           GoRoot: C:\Go\      // go的安装目录
+</code></pre><h3 id="2-安装beego框架"><a href="#2-安装beego框架" class="headerlink" title="2. 安装beego框架"></a>2. 安装beego框架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go get -u github.com/astaxie/beego  </span><br><span class="line">$ go get -u github.com/beego/bee</span><br></pre></td></tr></table></figure>
+<pre><code>src目录下执行 ---&gt;  $ go install github.com/beego/bee  (安装bee工具)  
+---&gt; gopath目录下会出现bin目录,里面包含 bee.exe      
+环境变量配置:   path: src/bin
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bee new hello   ---&gt;  生成src文件  ---&gt; 存放源码</span><br><span class="line">$ bee run hello   ---&gt;  生成bin/pkg 文件</span><br><span class="line">$ bee version     ---&gt;  验证是否安装成功</span><br></pre></td></tr></table></figure>
+<h3 id="3-安装vscode工具"><a href="#3-安装vscode工具" class="headerlink" title="3. 安装vscode工具"></a>3. 安装vscode工具</h3><p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">下载</a>后一直继续,安装成功<br>点击最左边工具栏”拓展”图标(ctrl+shift+x),搜索Go,安装后重启</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/01/golang安装与使用/" data-id="cjny5mbg500017knoobpm70td" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-nginx基本使用" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/30/nginx基本使用/" class="article-date">
@@ -92,7 +181,7 @@ ga('send', 'pageview');
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/30/nginx基本使用/">ngix 基本使用</a>
+      <a class="article-title" href="/2018/10/30/nginx基本使用/">nginx 基本使用</a>
     </h1>
   
 
@@ -116,7 +205,7 @@ nginx -s stop
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjnwykvsv0002ecnokz1nt8d1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjny5mbg900047knoiqbio47d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,9 +215,9 @@ nginx -s stop
 
 
   
-    <article id="post-markdown" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-markdown语法" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/29/markdown/" class="article-date">
+    <a href="/2018/10/29/markdown语法/" class="article-date">
   <time datetime="2018-10-29T05:27:40.000Z" itemprop="datePublished">2018-10-29</time>
 </a>
     
@@ -140,7 +229,7 @@ nginx -s stop
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/29/markdown/">markdown语法</a>
+      <a class="article-title" href="/2018/10/29/markdown语法/">markdown语法</a>
     </h1>
   
 
@@ -245,7 +334,7 @@ __double underscores__
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/markdown/" data-id="cjnwykvst0001ecno1vh0cec4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/29/markdown语法/" data-id="cjny5mbg800037knoaz9r9izu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +379,7 @@ __double underscores__
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/hello-world/" data-id="cjnwykvso0000ecno5tf8plra" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/29/hello-world/" data-id="cjny5mbg600027knowzcpwtri" class="article-share-link">Share</a>
       
       
     </footer>
@@ -315,7 +404,7 @@ __double underscores__
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -327,11 +416,19 @@ __double underscores__
       <ul>
         
           <li>
-            <a href="/2018/10/30/nginx基本使用/">ngix 基本使用</a>
+            <a href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
           </li>
         
           <li>
-            <a href="/2018/10/29/markdown/">markdown语法</a>
+            <a href="/2018/11/01/golang安装与使用/">golang安装与使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/30/nginx基本使用/">nginx 基本使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/29/markdown语法/">markdown语法</a>
           </li>
         
           <li>
