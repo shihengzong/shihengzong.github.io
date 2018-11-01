@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>nsq使用 | Seeu&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="安装下载解压解压出来的bin目录地址添加到环境变量 在golang中使用启动nsq:运行Nsq服务集群首先启动nsqlookud(相当于一个nsqd的容器)1nsqlookupd (nsqd可以通过&quot;127.0.0.1:4160&quot;接入, nsqadmin可以通过&quot;127.0.0.1:4161&quot;接入) 启动nsqd，并接入刚刚启动的nsqlookud。这里为了方便接下来的测试，启动了两个nsqd12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nsq使用">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/nsq使用/index.html">
+<meta property="og:site_name" content="Seeu&#39;s Blog">
+<meta property="og:description" content="安装下载解压解压出来的bin目录地址添加到环境变量 在golang中使用启动nsq:运行Nsq服务集群首先启动nsqlookud(相当于一个nsqd的容器)1nsqlookupd (nsqd可以通过&quot;127.0.0.1:4160&quot;接入, nsqadmin可以通过&quot;127.0.0.1:4161&quot;接入) 启动nsqd，并接入刚刚启动的nsqlookud。这里为了方便接下来的测试，启动了两个nsqd12">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-01T08:24:44.396Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nsq使用">
+<meta name="twitter:description" content="安装下载解压解压出来的bin目录地址添加到环境变量 在golang中使用启动nsq:运行Nsq服务集群首先启动nsqlookud(相当于一个nsqd的容器)1nsqlookupd (nsqd可以通过&quot;127.0.0.1:4160&quot;接入, nsqadmin可以通过&quot;127.0.0.1:4161&quot;接入) 启动nsqd，并接入刚刚启动的nsqlookud。这里为了方便接下来的测试，启动了两个nsqd12">
+<meta name="twitter:creator" content="@coolwuxing">
+  
+    <link rel="alternative" href="/atom.xml" title="Seeu&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43935113-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Seeu&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main"><article id="post-nsq使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/nsq使用/" class="article-date">
+  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nsq使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><a href="https://nsq.io/deployment/installing.html" target="_blank" rel="noopener">下载</a>解压<br>解压出来的bin目录地址添加到环境变量</p>
+<h3 id="在golang中使用"><a href="#在golang中使用" class="headerlink" title="在golang中使用"></a>在golang中使用</h3><h5 id="启动nsq"><a href="#启动nsq" class="headerlink" title="启动nsq:"></a>启动nsq:</h5><p>运行Nsq服务集群<br>首先启动nsqlookud(相当于一个nsqd的容器)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsqlookupd (nsqd可以通过<span class="string">"127.0.0.1:4160"</span>接入, nsqadmin可以通过<span class="string">"127.0.0.1:4161"</span>接入)</span><br></pre></td></tr></table></figure></p>
+<p>启动nsqd，并接入刚刚启动的nsqlookud。这里为了方便接下来的测试，启动了两个nsqd<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nsqd --lookupd-tcp-address=127.0.0.1:4160 (<span class="string">"4160"</span>是nsqlookup的默认端口)</span><br><span class="line">nsqd --lookupd-tcp-address=127.0.0.1:4160 -tcp-address=0.0.0.0:4152 -http-address=0.0.0.0:4153</span><br></pre></td></tr></table></figure></p>
+<p>启动nqsadmin,并接入刚刚启动的nsqlookud.<br>nsqadmin –lookupd-http-address=127.0.0.1:4161</p>
+<h5 id="生产端"><a href="#生产端" class="headerlink" title="生产端:"></a>生产端:</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    add := <span class="string">"127.0.0.1:8080"</span></span><br><span class="line">    InitProducer(add)</span><br><span class="line">    data:= &amp;struct&#123;</span><br><span class="line">        name:<span class="string">"张三"</span>,</span><br><span class="line">        sex:<span class="string">"男"</span>,</span><br><span class="line">    &#125;&#123;&#125;</span><br><span class="line">    strData, _ := json.Marshal(&amp;data)    //把结构体转成json字符串</span><br><span class="line">    Public(<span class="string">"topic"</span>,data) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 初始化生产者</span><br><span class="line">func InitProducer(add string) &#123;</span><br><span class="line">    var err error</span><br><span class="line">    fmt.Println(<span class="string">"address: "</span>, add)</span><br><span class="line">    producer, err = nsq.NewProducer(add, nsq.NewConfig())</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">     panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//发布消息</span><br><span class="line">func Publish(topic string, message string) error &#123;</span><br><span class="line">    var err error</span><br><span class="line">    <span class="keyword">if</span> producer != nil &#123;</span><br><span class="line">    <span class="keyword">if</span> message == <span class="string">""</span> &#123; //不能发布空串，否则会导致error</span><br><span class="line">        <span class="built_in">return</span> nil</span><br><span class="line">    &#125;</span><br><span class="line">    err = producer.Publish(topic, []byte(message)) // 发布消息</span><br><span class="line">        <span class="built_in">return</span> err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> fmt.Errorf(<span class="string">"producer is nil"</span>, err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="消费端-另一个项目"><a href="#消费端-另一个项目" class="headerlink" title="消费端(另一个项目):"></a>消费端(另一个项目):</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">// 消费者</span><br><span class="line"><span class="built_in">type</span> ConsumerT struct&#123;&#125;</span><br><span class="line"></span><br><span class="line">// 主函数</span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    InitConsumer(<span class="string">"test"</span>, <span class="string">"test-channel"</span>, <span class="string">"127.0.0.1:4161"</span>)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        time.Sleep(time.Second * 10)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//处理消息</span><br><span class="line">func (*ConsumerT) HandleMessage(msg *nsq.Message) error &#123;</span><br><span class="line">    fmt.Println(<span class="string">"receive"</span>, msg.NSQDAddress, <span class="string">"message:"</span>, string(msg.Body))</span><br><span class="line">    req:= &amp;struct&#123;</span><br><span class="line">        name string</span><br><span class="line">        sex string</span><br><span class="line">    &#125;&#123;&#125;</span><br><span class="line">    json.Unmarshal(msg.Body, &amp;req)</span><br><span class="line">    <span class="built_in">return</span> nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//初始化消费者</span><br><span class="line">func InitConsumer(topic string, channel string, address string) &#123;</span><br><span class="line">    cfg := nsq.NewConfig()</span><br><span class="line">    cfg.LookupdPollInterval = time.Second          //设置重连时间</span><br><span class="line">    c, err := nsq.NewConsumer(topic, channel, cfg) // 新建一个消费者</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">    c.SetLogger(nil, 0)        //屏蔽系统日志</span><br><span class="line">    c.AddHandler(&amp;ConsumerT&#123;&#125;) // 添加消费者接口</span><br><span class="line"></span><br><span class="line">    //建立NSQLookupd连接(<span class="string">"NSQLookupd"</span>连接以后,就可以通过<span class="string">"4161"</span>端口对产看ui页面)</span><br><span class="line">    <span class="keyword">if</span> err := c.ConnectToNSQLookupd(address); err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">    //建立nsqd连接(可以多个, 接收生产端的消息) </span><br><span class="line">    <span class="keyword">if</span> err := c.ConnectToNSQDs([]string&#123;<span class="string">"127.0.0.1:8080"</span>&#125;); err != nil &#123;</span><br><span class="line">      panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/01/nsq使用/" data-id="cjnybr0or000684nottwh7ykj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/11/01/http请求方式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          http请求方式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/01/golang安装与使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">golang安装与使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/01/http请求方式/">http请求方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/01/nsq使用/">nsq使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/01/golang安装与使用/">golang安装与使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/30/nginx基本使用/">nginx 基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id="foot-stars"></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 seeu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
