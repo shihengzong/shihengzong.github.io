@@ -3,15 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Archives: 2018 | Seeu&#39;s Blog</title>
+  <title>etcd服务发现 | Seeu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Seeu&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="什么是服务发现服务发现:一个服务就是一个功能,输入一个域名,DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链接包含的内容。我们根据域名 来获取我们所需要的服务，这就是服务发现例:用户输入:192.168.1.105:8080/ DNS服务器:解析出这个服务在 ip 为 “192.168.1.105”的服务器上 这台服务器上有n个服务/         #首页/login">
+<meta property="og:type" content="article">
+<meta property="og:title" content="etcd服务发现">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/etcd服务发现/index.html">
 <meta property="og:site_name" content="Seeu&#39;s Blog">
+<meta property="og:description" content="什么是服务发现服务发现:一个服务就是一个功能,输入一个域名,DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链接包含的内容。我们根据域名 来获取我们所需要的服务，这就是服务发现例:用户输入:192.168.1.105:8080/ DNS服务器:解析出这个服务在 ip 为 “192.168.1.105”的服务器上 这台服务器上有n个服务/         #首页/login">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-01T08:45:36.657Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Seeu&#39;s Blog">
+<meta name="twitter:title" content="etcd服务发现">
+<meta name="twitter:description" content="什么是服务发现服务发现:一个服务就是一个功能,输入一个域名,DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链接包含的内容。我们根据域名 来获取我们所需要的服务，这就是服务发现例:用户输入:192.168.1.105:8080/ DNS服务器:解析出这个服务在 ip 为 “192.168.1.105”的服务器上 这台服务器上有n个服务/         #首页/login">
 <meta name="twitter:creator" content="@coolwuxing">
   
     <link rel="alternative" href="/atom.xml" title="Seeu&#39;s Blog" type="application/atom+xml">
@@ -76,172 +80,65 @@ ga('send', 'pageview');
   </div>
 </div>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/01/Git 和 github 使用/" class="archive-article-date">
-  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">Nov 1</time>
+        <section id="main"><article id="post-etcd服务发现" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/etcd服务发现/" class="article-date">
+  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
+    <h1 class="article-title" itemprop="name">
+      etcd服务发现
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/01/etcd服务发现/" class="archive-article-date">
-  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">Nov 1</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/etcd服务发现/">etcd服务发现</a>
-    </h1>
-  
+        <h3 id="什么是服务发现"><a href="#什么是服务发现" class="headerlink" title="什么是服务发现"></a>什么是服务发现</h3><p>服务发现:一个服务就是一个功能,输入一个域名,DNS服务器会根据我们的域名解析出一个ip地址，返回ip地址中对应链接包含的内容。我们根据域名 来获取我们所需要的服务，这就是服务发现<br>例:<br>用户输入:<br>192.168.1.105:8080/</p>
+<p>DNS服务器:<br>解析出这个服务在 ip 为 “192.168.1.105”的服务器上</p>
+<p>这台服务器上有n个服务<br>/         #首页<br>/login    #登录<br>/regist   #注册<br>…</p>
+<p>通过域名 :8080/  找到首页服务 并在浏览器上显示</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/01/http请求方式/" class="archive-article-date">
-  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">Nov 1</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/http请求方式/">http请求方式</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/01/nsq使用/" class="archive-article-date">
-  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">Nov 1</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/01/etcd服务发现/" data-id="cjnzcb7na0001tgno8ch9ldqi" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/nsq使用/">nsq使用</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/01/golang安装与使用/" class="archive-article-date">
-  <time datetime="2018-11-01T03:18:55.000Z" itemprop="datePublished">Nov 1</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/golang安装与使用/">golang安装与使用</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/30/nginx基本使用/" class="archive-article-date">
-  <time datetime="2018-10-30T03:19:38.000Z" itemprop="datePublished">Oct 30</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/30/nginx基本使用/">nginx 基本使用</a>
-    </h1>
+    <a href="/2018/11/01/Git 和 github 使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Git 和 github 使用
+        
+      </div>
+    </a>
   
+  
+    <a href="/2018/11/01/http请求方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">http请求方式</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/29/markdown语法/" class="archive-article-date">
-  <time datetime="2018-10-29T05:27:40.000Z" itemprop="datePublished">Oct 29</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/29/markdown语法/">markdown语法</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/29/hello-world/" class="archive-article-date">
-  <time datetime="2018-10-29T03:42:32.896Z" itemprop="datePublished">Oct 29</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 </section>
         
           <aside id="sidebar">
