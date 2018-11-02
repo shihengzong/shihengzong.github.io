@@ -112,7 +112,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/Git 和 github 使用/" data-id="cjnzcb7na0000tgnoes6txq5u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/Git 和 github 使用/" data-id="cjnzfkght00004wnoclb0wgf5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,11 +148,12 @@ ga('send', 'pageview');
 <p>DNS服务器:<br>解析出这个服务在 ip 为 “192.168.1.105”的服务器上</p>
 <p>这台服务器上有n个服务<br>/         #首页<br>/login    #登录<br>/regist   #注册<br>…</p>
 <p>通过域名 :8080/  找到首页服务 并在浏览器上显示</p>
-
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>1.服务启动时向etcd注册一个地址<br>2.etcd保持时刻监听<br>3.监听到服务断开的时候立刻释放</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">package discovery</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    <span class="string">"github.com/coreos/etcd/clientv3"</span></span><br><span class="line">    <span class="string">"context"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"encoding/json"</span></span><br><span class="line">    <span class="string">"errors"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">//the detail of service </span><br><span class="line"><span class="built_in">type</span> ServiceInfo struct&#123;</span><br><span class="line">    IP   string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span> Service struct &#123;</span><br><span class="line">    Name        string</span><br><span class="line">    Info        ServiceInfo</span><br><span class="line">    stop        chan error</span><br><span class="line">    leaseid     clientv3.LeaseID</span><br><span class="line">    client      *clientv3.Client</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func NewService(name string, info ServiceInfo,endpoints []string) (*Service, error) &#123;</span><br><span class="line">    cli, err := clientv3.New(clientv3.Config&#123;</span><br><span class="line">        Endpoints:    endpoints,</span><br><span class="line">        DialTimeout: 2*time.Second,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">        <span class="built_in">return</span> nil, err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> &amp;Service &#123;</span><br><span class="line">        Name:        name,</span><br><span class="line">        Info:        info,</span><br><span class="line">        stop:        make (chan error),</span><br><span class="line">        client:     cli,</span><br><span class="line">    &#125;,err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (s *Service)  Start() error &#123;</span><br><span class="line">    </span><br><span class="line">    ch, err := s.keepAlive()</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">        <span class="built_in">return</span> err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        select &#123;</span><br><span class="line">        <span class="keyword">case</span> err := &lt;- s.stop:</span><br><span class="line">            s.revoke()</span><br><span class="line">            <span class="built_in">return</span> err</span><br><span class="line">        <span class="keyword">case</span> &lt;- s.client.Ctx().Done():</span><br><span class="line">            <span class="built_in">return</span> errors.New(<span class="string">"server closed"</span>)</span><br><span class="line">        <span class="keyword">case</span> ka, ok := &lt;-ch:</span><br><span class="line">            <span class="keyword">if</span> !ok &#123;</span><br><span class="line">                log.Println(<span class="string">"keep alive channel closed"</span>)</span><br><span class="line">                s.revoke()</span><br><span class="line">                <span class="built_in">return</span> nil</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                log.Printf(<span class="string">"Recv reply from service: %s, ttl:%d"</span>, s.Name, ka.TTL)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (s *Service) <span class="function"><span class="title">Stop</span></span>()  &#123;</span><br><span class="line">    s.stop &lt;- nil </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (s *Service) keepAlive() (&lt;-chan *clientv3.LeaseKeepAliveResponse, error)&#123;</span><br><span class="line"></span><br><span class="line">    info := &amp;s.Info</span><br><span class="line"></span><br><span class="line">    key := <span class="string">"services/"</span> + s.Name</span><br><span class="line">    value, _ := json.Marshal(info)</span><br><span class="line"></span><br><span class="line">    // minimum lease TTL is 5-second</span><br><span class="line">    resp, err := s.client.Grant(context.TODO(), 5)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">        <span class="built_in">return</span> nil, err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    _, err = s.client.Put(context.TODO(), key, string(value), clientv3.WithLease(resp.ID))</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">        <span class="built_in">return</span> nil, err</span><br><span class="line">    &#125;</span><br><span class="line">    s.leaseid = resp.ID</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span>  s.client.KeepAlive(context.TODO(), resp.ID)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (s *Service) revoke() error &#123;</span><br><span class="line"></span><br><span class="line">    _, err := s.client.Revoke(context.TODO(), s.leaseid)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    log.Printf(<span class="string">"servide:%s stop\n"</span>, s.Name)</span><br><span class="line">    <span class="built_in">return</span> err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/etcd服务发现/" data-id="cjnzcb7na0001tgno8ch9ldqi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/etcd服务发现/" data-id="cjnzfkghz00024wnoq15n1qud" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,7 +193,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/http请求方式/" data-id="cjnzcb7nq0004tgno66txiqto" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/http请求方式/" data-id="cjnzfkgi200044wno298vah6a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -233,7 +234,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/nsq使用/" data-id="cjnzcb7nq0007tgnods8cupbj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/nsq使用/" data-id="cjnzfkgi500074wnododuwiwo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -278,7 +279,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/golang安装与使用/" data-id="cjnzcb7na0002tgnoow8a77o3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/golang安装与使用/" data-id="cjnzfkghx00014wnowv9hxjfw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -327,7 +328,7 @@ nginx -s stop
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjnzcb7nq0005tgnob37c5zr7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjnzfkgi400064wnorgtvyir3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +457,7 @@ __double underscores__
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/markdown语法/" data-id="cjnzcb7nq0006tgno90h4eg3j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/29/markdown语法/" data-id="cjnzfkgi300054wnonrkkw3at" class="article-share-link">Share</a>
       
       
     </footer>
@@ -501,7 +502,7 @@ __double underscores__
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/hello-world/" data-id="cjnzcb7na0003tgnob1ac8ekr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/29/hello-world/" data-id="cjnzfkgi000034wnov8d3f22f" class="article-share-link">Share</a>
       
       
     </footer>
