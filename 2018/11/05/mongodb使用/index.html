@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>mongodb使用 | Seeu&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738   url := &quot;mongodb://zcmwrite:zcm20162016@10.139.154.116:27017/zcm_api_dev&quot;session, err := mgo.Dial(url)if err != nil &amp;#123;	panic(er">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongodb使用">
+<meta property="og:url" content="http://yoursite.com/2018/11/05/mongodb使用/index.html">
+<meta property="og:site_name" content="Seeu&#39;s Blog">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738   url := &quot;mongodb://zcmwrite:zcm20162016@10.139.154.116:27017/zcm_api_dev&quot;session, err := mgo.Dial(url)if err != nil &amp;#123;	panic(er">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-06T07:42:13.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mongodb使用">
+<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132333435363738   url := &quot;mongodb://zcmwrite:zcm20162016@10.139.154.116:27017/zcm_api_dev&quot;session, err := mgo.Dial(url)if err != nil &amp;#123;	panic(er">
+<meta name="twitter:creator" content="@coolwuxing">
+  
+    <link rel="alternative" href="/atom.xml" title="Seeu&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-43935113-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Seeu&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main"><article id="post-mongodb使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/05/mongodb使用/" class="article-date">
+  <time datetime="2018-11-05T05:19:38.000Z" itemprop="datePublished">2018-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mongodb使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">   url := <span class="string">"mongodb://zcmwrite:zcm20162016@10.139.154.116:27017/zcm_api_dev"</span></span><br><span class="line">session, err := mgo.Dial(url)</span><br><span class="line"><span class="keyword">if</span> err != nil &#123;</span><br><span class="line">	panic(err)</span><br><span class="line">&#125;</span><br><span class="line">defer session.Close()</span><br><span class="line">session.SetMode(mgo.Monotonic, <span class="literal">true</span>)</span><br><span class="line">c := session.DB(<span class="string">"zcm_api_dev"</span>).C(<span class="string">"zhima_credit"</span>)   <span class="comment"># zcm_api_dev是库名 zhima_credit是表名</span></span><br><span class="line">err = c.Insert(&amp;people)</span><br><span class="line"><span class="keyword">if</span> err != nil &#123;</span><br><span class="line">	fmt.Println(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   //*****查询单条数据*******  </span><br><span class="line">    result := &amp;people&#123;&#125;  </span><br><span class="line">  </span><br><span class="line">    err = collection.Find(bson.M&#123;<span class="string">"phone"</span>: <span class="string">"13798245114"</span>&#125;).One(&amp;result) //查询单条phone为13798245114的结果  </span><br><span class="line">       fmt.Println(<span class="string">"Phone:"</span>, result.NAME, result.PHONE)               //输出单条phone为13798245114的结果  </span><br><span class="line">  </span><br><span class="line">    //*****查询多条数据*******  </span><br><span class="line">    var personAll Men //存放结果  </span><br><span class="line">    iter := collection.Find(nil).Iter()  </span><br><span class="line">    <span class="keyword">for</span> iter.Next(&amp;result) &#123;  </span><br><span class="line">        fmt.Printf(<span class="string">"Result: %v\n"</span>, result)  </span><br><span class="line">        personAll.Persons = append(personAll.Persons, result)  </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment"># "WHERE id_card=id_card AND trans_id != trans_id AND is_last = 1"</span></span><br><span class="line">       <span class="comment"># "trans_id": bson.M&#123;"$ne": transId&#125; 等同于  trans_id != trans_id</span></span><br><span class="line">selector := bson.M&#123;<span class="string">"id_card"</span>: idCard, <span class="string">"trans_id"</span>: bson.M&#123;<span class="string">"<span class="variable">$ne</span>"</span>: transId&#125;, <span class="string">"is_last"</span>: 1&#125;  </span><br><span class="line">data := bson.M&#123;<span class="string">"<span class="variable">$set</span>"</span>: bson.M&#123;<span class="string">"is_last"</span>: 0&#125;&#125;</span><br><span class="line">_, err = c.UpdateAll(selector, data)</span><br><span class="line"><span class="keyword">if</span> err != nil &#123;</span><br><span class="line">	println(<span class="string">"mongodb 更新失败， "</span> + err.Error())</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	println(<span class="string">"mongodb 更新成功！！！！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/05/mongodb使用/" data-id="cjo9rbx4b0002n4nouc1x9yuu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/05/go_utils/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">golang常用api</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/05/mongodb使用/">mongodb使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/05/go_utils/">golang常用api</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/05/truffle框架开发新代币/">truffle框架开发新代币</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/05/grpc的使用/">grpc安装与使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/02/docker使用/">docker 使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id="foot-stars"></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 seeu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

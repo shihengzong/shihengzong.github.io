@@ -78,6 +78,100 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-mongodb使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/05/mongodb使用/" class="article-date">
+  <time datetime="2018-11-05T05:19:38.000Z" itemprop="datePublished">2018-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/05/mongodb使用/">mongodb使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">   url := <span class="string">"mongodb://zcmwrite:zcm20162016@10.139.154.116:27017/zcm_api_dev"</span></span><br><span class="line">session, err := mgo.Dial(url)</span><br><span class="line"><span class="keyword">if</span> err != nil &#123;</span><br><span class="line">	panic(err)</span><br><span class="line">&#125;</span><br><span class="line">defer session.Close()</span><br><span class="line">session.SetMode(mgo.Monotonic, <span class="literal">true</span>)</span><br><span class="line">c := session.DB(<span class="string">"zcm_api_dev"</span>).C(<span class="string">"zhima_credit"</span>)   <span class="comment"># zcm_api_dev是库名 zhima_credit是表名</span></span><br><span class="line">err = c.Insert(&amp;people)</span><br><span class="line"><span class="keyword">if</span> err != nil &#123;</span><br><span class="line">	fmt.Println(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   //*****查询单条数据*******  </span><br><span class="line">    result := &amp;people&#123;&#125;  </span><br><span class="line">  </span><br><span class="line">    err = collection.Find(bson.M&#123;<span class="string">"phone"</span>: <span class="string">"13798245114"</span>&#125;).One(&amp;result) //查询单条phone为13798245114的结果  </span><br><span class="line">       fmt.Println(<span class="string">"Phone:"</span>, result.NAME, result.PHONE)               //输出单条phone为13798245114的结果  </span><br><span class="line">  </span><br><span class="line">    //*****查询多条数据*******  </span><br><span class="line">    var personAll Men //存放结果  </span><br><span class="line">    iter := collection.Find(nil).Iter()  </span><br><span class="line">    <span class="keyword">for</span> iter.Next(&amp;result) &#123;  </span><br><span class="line">        fmt.Printf(<span class="string">"Result: %v\n"</span>, result)  </span><br><span class="line">        personAll.Persons = append(personAll.Persons, result)  </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment"># "WHERE id_card=id_card AND trans_id != trans_id AND is_last = 1"</span></span><br><span class="line">       <span class="comment"># "trans_id": bson.M&#123;"$ne": transId&#125; 等同于  trans_id != trans_id</span></span><br><span class="line">selector := bson.M&#123;<span class="string">"id_card"</span>: idCard, <span class="string">"trans_id"</span>: bson.M&#123;<span class="string">"<span class="variable">$ne</span>"</span>: transId&#125;, <span class="string">"is_last"</span>: 1&#125;  </span><br><span class="line">data := bson.M&#123;<span class="string">"<span class="variable">$set</span>"</span>: bson.M&#123;<span class="string">"is_last"</span>: 0&#125;&#125;</span><br><span class="line">_, err = c.UpdateAll(selector, data)</span><br><span class="line"><span class="keyword">if</span> err != nil &#123;</span><br><span class="line">	println(<span class="string">"mongodb 更新失败， "</span> + err.Error())</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	println(<span class="string">"mongodb 更新成功！！！！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/05/mongodb使用/" data-id="cjo9rbx4b0002n4nouc1x9yuu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-go_utils" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/05/go_utils/" class="article-date">
+  <time datetime="2018-11-05T05:19:38.000Z" itemprop="datePublished">2018-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/05/go_utils/">golang常用api</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-int-int64和string转换"><a href="#1-int-int64和string转换" class="headerlink" title="1. int/int64和string转换"></a>1. int/int64和string转换</h4><pre><code>import &quot;strconv&quot;&quot;
+
+int转成string： 
+--&gt; string := strconv.Itoa(int)
+
+int64转成string： 
+--&gt; string := strconv.FormatInt(int64,10)
+
+string转成int： 
+--&gt; int, err := strconv.Atoi(string)
+
+string转成int64： 
+-- &gt;int64, err := strconv.ParseInt(string, 10, 64)
+</code></pre><h4 id="2-float和string转换"><a href="#2-float和string转换" class="headerlink" title="2. float和string转换"></a>2. float和string转换</h4><pre><code>import &quot;strconv&quot;&quot;
+
+string到float32(float64)： 
+--&gt; float,err := strconv.ParseFloat(string,32/64)
+
+float64转成string： 
+--&gt; string := strconv.FormatFloat(float64, &apos;E&apos;, -1, 64)
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> //float64转成 string 保留8位小数,小数末尾是零则去掉:</span><br><span class="line">import (</span><br><span class="line"></span><br><span class="line">	<span class="string">"regexp"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func Float64Tostring(g float64) string &#123;</span><br><span class="line">    h := strconv.FormatFloat(g, <span class="string">'f'</span>, 8, 64)</span><br><span class="line">    <span class="keyword">if</span> strings.Contains(h, <span class="string">"."</span>) &#123;</span><br><span class="line">        //正则表达</span><br><span class="line">        re, _ := regexp.Compile(<span class="string">"0+?$"</span>) //去掉后面无用的零</span><br><span class="line">        h = re.ReplaceAllString(h, <span class="string">""</span>)</span><br><span class="line">        re, _ = regexp.Compile(<span class="string">"[.]$"</span>) //如小数点后面全是零则去掉小数点</span><br><span class="line">        h = re.ReplaceAllString(h, <span class="string">""</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> h</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-time格式和string转换"><a href="#3-time格式和string转换" class="headerlink" title="3. time格式和string转换"></a>3. time格式和string转换</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import (</span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">base_format := <span class="string">"2006-01-02 15:04:05"</span></span><br><span class="line">nowtime := time.Now()</span><br><span class="line"></span><br><span class="line">//转换为时间格式字符串</span><br><span class="line">str_time := nowtime.Format(base_format)</span><br><span class="line"></span><br><span class="line">//时间字符串转换为日期格式</span><br><span class="line">time_str, _ := time.Parse(base_format, str_time)</span><br><span class="line"></span><br><span class="line">//时间戳 秒</span><br><span class="line">timestamp := nowtime.Unix()</span><br><span class="line"></span><br><span class="line">//时间戳 毫秒</span><br><span class="line">msec := nowtime.UnixNano() / 1e6</span><br><span class="line"></span><br><span class="line">//一小时之前的时间</span><br><span class="line">beforeAnHour := timestamp - (60 * 60)</span><br><span class="line">beforeAnHourTime := time.Unix(beforeAnHour, 0).Format(<span class="string">"2006-01-02 15:04:05"</span>)</span><br><span class="line">fmt.Println(<span class="string">"一小时之前的时间是:"</span>, beforeAnHourTime)</span><br></pre></td></tr></table></figure>
+<h4 id="4-json序列化和反序列化"><a href="#4-json序列化和反序列化" class="headerlink" title="4. json序列化和反序列化"></a>4. json序列化和反序列化</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import (</span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">str_json := `&#123;<span class="string">"name"</span>:<span class="string">"张三"</span>,<span class="string">"age"</span>:18,<span class="string">"sex"</span>:<span class="string">"男"</span>&#125;`</span><br><span class="line">	<span class="built_in">type</span> Person struct &#123;</span><br><span class="line">		Name string</span><br><span class="line">		Age  int</span><br><span class="line">		Sex  string</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//json 转对象</span><br><span class="line">	var req Person</span><br><span class="line">	json.Unmarshal([]byte(str_json), &amp;req)</span><br><span class="line">	fmt.Printf(<span class="string">"=== req: === : %+v \n"</span>, req)</span><br><span class="line">	//对象转json字符串</span><br><span class="line">	data, _ := json.Marshal(req)</span><br><span class="line">	fmt.Println(<span class="string">"=== data === :"</span>, string(data))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/05/go_utils/" data-id="cjo9rbx3u0000n4no4vhvlk7e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-truffle框架开发新代币" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/05/truffle框架开发新代币/" class="article-date">
@@ -147,7 +241,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/05/truffle框架开发新代币/" data-id="cjo5dpvri0000qwno8ii82pss" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/05/truffle框架开发新代币/" data-id="cjo5dqeri000aiwno8ofjdkop" class="article-share-link">Share</a>
       
       
     </footer>
@@ -193,7 +287,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/05/grpc的使用/" data-id="cjo43lr820004ngnoptlm0d2q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/05/grpc的使用/" data-id="cjo5dqer30004iwnoeftlad7q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,92 +345,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/02/docker使用/" data-id="cjo43lr7y0001ngnor57g8npf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-nsq使用" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/01/nsq使用/" class="article-date">
-  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/nsq使用/">nsq使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><a href="https://nsq.io/deployment/installing.html" target="_blank" rel="noopener">下载</a>解压<br>解压出来的bin目录地址添加到环境变量</p>
-<h3 id="在golang中使用"><a href="#在golang中使用" class="headerlink" title="在golang中使用"></a>在golang中使用</h3><h5 id="启动nsq"><a href="#启动nsq" class="headerlink" title="启动nsq:"></a>启动nsq:</h5><p>运行Nsq服务集群<br>首先启动nsqlookud(相当于一个nsqd的容器)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsqlookupd (nsqd可以通过<span class="string">"127.0.0.1:4160"</span>接入, nsqadmin可以通过<span class="string">"127.0.0.1:4161"</span>接入)</span><br></pre></td></tr></table></figure></p>
-<p>启动nsqd，并接入刚刚启动的nsqlookud。这里为了方便接下来的测试，启动了两个nsqd<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nsqd --lookupd-tcp-address=127.0.0.1:4160 (<span class="string">"4160"</span>是nsqlookup的默认端口)</span><br><span class="line">nsqd --lookupd-tcp-address=127.0.0.1:4160 -tcp-address=0.0.0.0:4152 -http-address=0.0.0.0:4153</span><br></pre></td></tr></table></figure></p>
-<p>启动nqsadmin,并接入刚刚启动的nsqlookud.<br>nsqadmin –lookupd-http-address=127.0.0.1:4161</p>
-<h5 id="生产端"><a href="#生产端" class="headerlink" title="生产端:"></a>生产端:</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    add := <span class="string">"127.0.0.1:8080"</span></span><br><span class="line">    InitProducer(add)</span><br><span class="line">    data:= &amp;struct&#123;</span><br><span class="line">        name:<span class="string">"张三"</span>,</span><br><span class="line">        sex:<span class="string">"男"</span>,</span><br><span class="line">    &#125;&#123;&#125;</span><br><span class="line">    strData, _ := json.Marshal(&amp;data)    //把结构体转成json字符串</span><br><span class="line">    Public(<span class="string">"topic"</span>,data) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 初始化生产者</span><br><span class="line">func InitProducer(add string) &#123;</span><br><span class="line">    var err error</span><br><span class="line">    fmt.Println(<span class="string">"address: "</span>, add)</span><br><span class="line">    producer, err = nsq.NewProducer(add, nsq.NewConfig())</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">     panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//发布消息</span><br><span class="line">func Publish(topic string, message string) error &#123;</span><br><span class="line">    var err error</span><br><span class="line">    <span class="keyword">if</span> producer != nil &#123;</span><br><span class="line">    <span class="keyword">if</span> message == <span class="string">""</span> &#123; //不能发布空串，否则会导致error</span><br><span class="line">        <span class="built_in">return</span> nil</span><br><span class="line">    &#125;</span><br><span class="line">    err = producer.Publish(topic, []byte(message)) // 发布消息</span><br><span class="line">        <span class="built_in">return</span> err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> fmt.Errorf(<span class="string">"producer is nil"</span>, err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="消费端-另一个项目"><a href="#消费端-另一个项目" class="headerlink" title="消费端(另一个项目):"></a>消费端(另一个项目):</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">// 消费者</span><br><span class="line"><span class="built_in">type</span> ConsumerT struct&#123;&#125;</span><br><span class="line"></span><br><span class="line">// 主函数</span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    InitConsumer(<span class="string">"test"</span>, <span class="string">"test-channel"</span>, <span class="string">"127.0.0.1:4161"</span>)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        time.Sleep(time.Second * 10)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//处理消息</span><br><span class="line">func (*ConsumerT) HandleMessage(msg *nsq.Message) error &#123;</span><br><span class="line">    fmt.Println(<span class="string">"receive"</span>, msg.NSQDAddress, <span class="string">"message:"</span>, string(msg.Body))</span><br><span class="line">    req:= &amp;struct&#123;</span><br><span class="line">        name string</span><br><span class="line">        sex string</span><br><span class="line">    &#125;&#123;&#125;</span><br><span class="line">    json.Unmarshal(msg.Body, &amp;req)</span><br><span class="line">    <span class="built_in">return</span> nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//初始化消费者</span><br><span class="line">func InitConsumer(topic string, channel string, address string) &#123;</span><br><span class="line">    cfg := nsq.NewConfig()</span><br><span class="line">    cfg.LookupdPollInterval = time.Second          //设置重连时间</span><br><span class="line">    c, err := nsq.NewConsumer(topic, channel, cfg) // 新建一个消费者</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">    c.SetLogger(nil, 0)        //屏蔽系统日志</span><br><span class="line">    c.AddHandler(&amp;ConsumerT&#123;&#125;) // 添加消费者接口</span><br><span class="line"></span><br><span class="line">    //建立NSQLookupd连接(<span class="string">"NSQLookupd"</span>连接以后,就可以通过<span class="string">"4161"</span>端口对产看ui页面)</span><br><span class="line">    <span class="keyword">if</span> err := c.ConnectToNSQLookupd(address); err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">    //建立nsqd连接(可以多个, 接收生产端的消息) </span><br><span class="line">    <span class="keyword">if</span> err := c.ConnectToNSQDs([]string&#123;<span class="string">"127.0.0.1:8080"</span>&#125;); err != nil &#123;</span><br><span class="line">      panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/nsq使用/" data-id="cjo43lr8d0008ngnosairg1a8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Git 和 github 使用" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/01/Git 和 github 使用/" class="article-date">
-  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-下载Git"><a href="#1-下载Git" class="headerlink" title="1. 下载Git"></a>1. 下载Git</h3><p><a href="https://gitforwindows.org/" target="_blank" rel="noopener">下载</a>  默认安装</p>
-<h3 id="2-注册github账号"><a href="#2-注册github账号" class="headerlink" title="2. 注册github账号"></a>2. 注册github账号</h3><p><a href="https://github.com/join?source=login" target="_blank" rel="noopener">注册</a> 按步骤注册github账号</p>
-<h3 id="3-创建私钥"><a href="#3-创建私钥" class="headerlink" title="3. 创建私钥"></a>3. 创建私钥</h3><p>桌面右键,打开gitbash<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure></p>
-<p>后面的<a href="mailto:your_email@youremail.com" target="_blank" rel="noopener">your_email@youremail.com</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</p>
-<p>回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key</p>
-<h3 id="4-设置默认用户"><a href="#4-设置默认用户" class="headerlink" title="4. 设置默认用户"></a>4. 设置默认用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"your name"</span></span><br><span class="line">$ git config --global user.email <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure>
-<h3 id="5-新建仓库"><a href="#5-新建仓库" class="headerlink" title="5. 新建仓库"></a>5. 新建仓库</h3><p>到github上 ,右上角 new repository 新建一个仓库<br>进到src 目录下执行  git clone htttp://github.com/xxxxx  (仓库的地址)<br>进到克隆的项目目录下, bee new “项目名”</p>
-<h3 id="6-上传到github"><a href="#6-上传到github" class="headerlink" title="6. 上传到github"></a>6. 上传到github</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">"first"</span></span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
-<h3 id="7-git-常用命令"><a href="#7-git-常用命令" class="headerlink" title="7. git 常用命令"></a>7. git 常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b dev-zsh-seeu   //创建一个 dev-zsh-seeu 的开发分支</span><br><span class="line">$ git stash                      //把当前修改暂存</span><br><span class="line">$ git stash  pop                 //把暂存的修改取回来  </span><br><span class="line">$ git pull origin master         //把master分支的代码拉下来</span><br><span class="line">$ git checkout                   //放弃所有修改</span><br><span class="line">$ git branch -a                  //查看所有分支</span><br><span class="line">$ git config --global credential.helper store  //不用每次输密码</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/Git 和 github 使用/" data-id="cjo43lr7t0000ngnobhu3mov1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/02/docker使用/" data-id="cjo5dqeqz0001iwnov6pjbbwh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -380,7 +389,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/etcd服务发现/" data-id="cjo43lr7z0002ngnowna1dqjg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/etcd服务发现/" data-id="cjo5dqer00002iwnodszc8qsg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +429,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/http请求方式/" data-id="cjo43lr850007ngno333g59vd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/http请求方式/" data-id="cjo5dqerd0006iwnocf94v1ru" class="article-share-link">Share</a>
       
       
     </footer>
@@ -430,10 +439,10 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-golang安装与使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-goroutine" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/01/golang安装与使用/" class="article-date">
-  <time datetime="2018-11-01T03:18:55.000Z" itemprop="datePublished">2018-11-01</time>
+    <a href="/2018/11/01/goroutine/" class="article-date">
+  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
 </a>
     
   </div>
@@ -444,7 +453,7 @@ ga('send', 'pageview');
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/01/golang安装与使用/">golang安装与使用</a>
+      <a class="article-title" href="/2018/11/01/goroutine/">goroutine使用</a>
     </h1>
   
 
@@ -452,20 +461,11 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-下载golang安装包"><a href="#1-下载golang安装包" class="headerlink" title="1. 下载golang安装包"></a>1. 下载golang安装包</h3><p><a href="https://www.golangtc.com/download" target="_blank" rel="noopener">下载</a> msi 安装后自动配置环境变量</p>
-<pre><code>继续设置   GoPath: D:\go       //工作目录
-           GoRoot: C:\Go\      // go的安装目录
-</code></pre><h3 id="2-安装beego框架"><a href="#2-安装beego框架" class="headerlink" title="2. 安装beego框架"></a>2. 安装beego框架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go get -u github.com/astaxie/beego  </span><br><span class="line">$ go get -u github.com/beego/bee</span><br></pre></td></tr></table></figure>
-<pre><code>src目录下执行 ---&gt;  $ go install github.com/beego/bee  (安装bee工具)  
----&gt; gopath目录下会出现bin目录,里面包含 bee.exe      
-环境变量配置:   path: src/bin
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bee new hello   ---&gt;  生成src文件  ---&gt; 存放源码</span><br><span class="line">$ bee run hello   ---&gt;  生成bin/pkg 文件</span><br><span class="line">$ bee version     ---&gt;  验证是否安装成功</span><br></pre></td></tr></table></figure>
-<h3 id="3-安装vscode工具"><a href="#3-安装vscode工具" class="headerlink" title="3. 安装vscode工具"></a>3. 安装vscode工具</h3><p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">下载</a>后一直继续,安装成功<br>点击最左边工具栏”拓展”图标(ctrl+shift+x),搜索Go,安装后重启</p>
-
+        <h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var wg sync.WaitGroup   <span class="comment">#定义一个等待并发结束的组</span></span><br><span class="line">func <span class="function"><span class="title">TestGoroutine</span></span>()&#123;</span><br><span class="line">    var num int = 10     <span class="comment">#并发个数</span></span><br><span class="line">    <span class="keyword">for</span> i:=0;i&lt;num;i++&#123;</span><br><span class="line">        wg.Add(1)           <span class="comment"># 往等待组里添加一个线程</span></span><br><span class="line">        go Process(i)      <span class="comment">#开启了10个 进程</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()              <span class="comment">#wg等于0时释放</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Process(a int)&#123;</span><br><span class="line">    fmt.Println(<span class="string">"进程:"</span>,a)</span><br><span class="line">    fmt.Println()</span><br><span class="line">    wg.Done()               <span class="comment"># 线程执行完等待组里关闭一个线程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/golang安装与使用/" data-id="cjo43lr810003ngnoobllgne6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/goroutine/" data-id="cjo9rbx420001n4no7zlsb7zo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -475,10 +475,10 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-nginx基本使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-Git 和 github 使用" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/30/nginx基本使用/" class="article-date">
-  <time datetime="2018-10-30T03:19:38.000Z" itemprop="datePublished">2018-10-30</time>
+    <a href="/2018/11/01/Git 和 github 使用/" class="article-date">
+  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
 </a>
     
   </div>
@@ -489,7 +489,7 @@ ga('send', 'pageview');
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/30/nginx基本使用/">nginx 基本使用</a>
+      <a class="article-title" href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
     </h1>
   
 
@@ -497,24 +497,19 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-启动ngix"><a href="#1-启动ngix" class="headerlink" title="1. 启动ngix"></a>1. 启动ngix</h4><h5 id="windows下启动"><a href="#windows下启动" class="headerlink" title="windows下启动"></a>windows下启动</h5><pre><code>cd nginx14-04    //进入目录
-start nginx
-</code></pre><p>#####linux下启动<br>    cd nginx14-04    //进入目录<br>    nginx</p>
-<h4 id="2-反向代理"><a href="#2-反向代理" class="headerlink" title="2. 反向代理"></a>2. 反向代理</h4><p>nginx接收到客户端的请求,通过正则表达式,转发到不同的服务器</p>
-<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       81;                #监听端口(localhost:81)</span><br><span class="line">       server_name  localhost;</span><br><span class="line">       location / &#123;                    #/表示匹配所有  转发到 http://127.0.0.1:9999</span><br><span class="line">           proxy_pass   http://127.0.0.1:9999;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br><span class="line">       location /v1 &#123;                  #localhost:81/v1 转发到 http://127.0.0.1:9982</span><br><span class="line">           proxy_pass   http://127.0.0.1:9982;</span><br><span class="line">           proxy_redirect off;</span><br><span class="line">           proxy_set_header Host $host;</span><br><span class="line">           proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           client_max_body_size 200m;</span><br><span class="line">           access_log off;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="2-负载均衡"><a href="#2-负载均衡" class="headerlink" title="2. 负载均衡"></a>2. 负载均衡</h4><p>将同一任务的多次请求分摊到不同的服务器上,达到资源有效合理分配</p>
-<pre><code>upstream mysvr { 
-    server 127.0.0.1:7878 weight=1;
-    server 192.168.10.121:3333 weight=2;
-}
-</code></pre><p>weight: 加权轮询   按照abb abb abb 的循环去分配请求</p>
-<h4 id="3-关闭nginx"><a href="#3-关闭nginx" class="headerlink" title="3. 关闭nginx"></a>3. 关闭nginx</h4><pre><code>cd nginx14-04
-nginx -s stop
-</code></pre>
+        <h3 id="1-下载Git"><a href="#1-下载Git" class="headerlink" title="1. 下载Git"></a>1. 下载Git</h3><p><a href="https://gitforwindows.org/" target="_blank" rel="noopener">下载</a>  默认安装</p>
+<h3 id="2-注册github账号"><a href="#2-注册github账号" class="headerlink" title="2. 注册github账号"></a>2. 注册github账号</h3><p><a href="https://github.com/join?source=login" target="_blank" rel="noopener">注册</a> 按步骤注册github账号</p>
+<h3 id="3-创建私钥"><a href="#3-创建私钥" class="headerlink" title="3. 创建私钥"></a>3. 创建私钥</h3><p>桌面右键,打开gitbash<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>后面的<a href="mailto:your_email@youremail.com" target="_blank" rel="noopener">your_email@youremail.com</a>改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。</p>
+<p>回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key</p>
+<h3 id="4-设置默认用户"><a href="#4-设置默认用户" class="headerlink" title="4. 设置默认用户"></a>4. 设置默认用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"your name"</span></span><br><span class="line">$ git config --global user.email <span class="string">"your_email@youremail.com"</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-新建仓库"><a href="#5-新建仓库" class="headerlink" title="5. 新建仓库"></a>5. 新建仓库</h3><p>到github上 ,右上角 new repository 新建一个仓库<br>进到src 目录下执行  git clone htttp://github.com/xxxxx  (仓库的地址)<br>进到克隆的项目目录下, bee new “项目名”</p>
+<h3 id="6-上传到github"><a href="#6-上传到github" class="headerlink" title="6. 上传到github"></a>6. 上传到github</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">"first"</span></span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="7-git-常用命令"><a href="#7-git-常用命令" class="headerlink" title="7. git 常用命令"></a>7. git 常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b dev-zsh-seeu   //创建一个 dev-zsh-seeu 的开发分支</span><br><span class="line">$ git stash                      //把当前修改暂存</span><br><span class="line">$ git stash  pop                 //把暂存的修改取回来  </span><br><span class="line">$ git pull origin master         //把master分支的代码拉下来</span><br><span class="line">$ git checkout                   //放弃所有修改</span><br><span class="line">$ git branch -a                  //查看所有分支</span><br><span class="line">$ git config --global credential.helper store  //不用每次输密码</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjo43lr8e0009ngnow74g3esc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/Git 和 github 使用/" data-id="cjo5dqequ0000iwnop3ygn8jn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -524,10 +519,10 @@ nginx -s stop
 
 
   
-    <article id="post-markdown语法" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-nsq使用" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/29/markdown语法/" class="article-date">
-  <time datetime="2018-10-29T05:27:40.000Z" itemprop="datePublished">2018-10-29</time>
+    <a href="/2018/11/01/nsq使用/" class="article-date">
+  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
 </a>
     
   </div>
@@ -538,7 +533,7 @@ nginx -s stop
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/29/markdown语法/">markdown语法</a>
+      <a class="article-title" href="/2018/11/01/nsq使用/">nsq使用</a>
     </h1>
   
 
@@ -546,104 +541,16 @@ nginx -s stop
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="1-兼容html"><a href="#1-兼容html" class="headerlink" title="1.兼容html"></a>1.兼容html</h5><p>例:</p>
-<pre><code>&lt;table&gt;
-    &lt;tr&gt;
-        &lt;td&gt;Foo&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
-</code></pre><p>效果为:</p>
-<table><br>    <tr><br>        <td>Foo</td><br>    </tr><br></table>
-
-<hr>
-<h5 id="2-标题"><a href="#2-标题" class="headerlink" title="2.标题"></a>2.标题</h5><pre><code>--(1).下划线
-This is an H1
-=============
-
-This is an H2
--------------
-</code></pre><p>效果为:</p>
-<h1 id="This-is-an-H1"><a href="#This-is-an-H1" class="headerlink" title="This is an H1"></a>This is an H1</h1><h2 id="This-is-an-H2"><a href="#This-is-an-H2" class="headerlink" title="This is an H2"></a>This is an H2</h2><pre><code>--(2).1到6个#
-
-# 这是 H1
-
-## 这是 H2
-
-###### 这是 H6
-</code></pre><p>效果为:</p>
-<h1 id="这是-H1"><a href="#这是-H1" class="headerlink" title="这是 H1"></a>这是 H1</h1><h2 id="这是-H2"><a href="#这是-H2" class="headerlink" title="这是 H2"></a>这是 H2</h2><h6 id="这是-H6"><a href="#这是-H6" class="headerlink" title="这是 H6"></a>这是 H6</h6><hr>
-<h5 id="3-列表"><a href="#3-列表" class="headerlink" title="3.列表"></a>3.列表</h5><p>无序列表使用星号、加号或是减号作为列表标记,三种效果相同：</p>
-<pre><code>* Red
-* Green
-* Blue
-
-+ AAA
-+ BBB
-+ CCC
-
-- EEE
-- DDD
-- GGG
-</code></pre><p>效果为:</p>
-<ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue</li>
-</ul>
-<ul>
-<li>AAA</li>
-<li>BBB</li>
-<li>CCC</li>
-</ul>
-<ul>
-<li>EEE</li>
-<li>DDD</li>
-<li>GGG</li>
-</ul>
-<hr>
-<h5 id="3-缩进"><a href="#3-缩进" class="headerlink" title="3.缩进"></a>3.缩进</h5><pre><code>例:四个空格为缩进两个字符:
-    (8个空格)这是一段缩进后的文字
-</code></pre><p>效果为:</p>
-<pre><code>这是一段缩进后的文字
-</code></pre><hr>
-<h5 id="4-分割线"><a href="#4-分割线" class="headerlink" title="4.分割线"></a>4.分割线</h5><pre><code>* * *
-
-***
-
-*****
-
-- - -
-
----------------------------------------
-</code></pre><p>效果相同为:</p>
-<hr>
-<h5 id="5-链接"><a href="#5-链接" class="headerlink" title="5.链接"></a>5.链接</h5><pre><code>例:
-[百度一下](http://www.baidu.com)
-</code></pre><p>效果为:</p>
-<p><a href="http://www.baidu.com" target="_blank" rel="noopener">百度一下</a></p>
-<hr>
-<h5 id="6-强调"><a href="#6-强调" class="headerlink" title="6.强调"></a>6.强调</h5><pre><code>例:
-*single asterisks*
-
-_single underscores_
-
-**double asterisks**
-
-__double underscores__
-</code></pre><p>效果为:<br><em>single asterisks</em></p>
-<p><em>single underscores</em></p>
-<p><strong>double asterisks</strong></p>
-<p><strong>double underscores</strong></p>
-<hr>
-<h5 id="7-代码"><a href="#7-代码" class="headerlink" title="7.代码"></a>7.代码</h5><pre><code>三个反引号标注,例:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func HelloWorld()&#123;</span><br><span class="line">    fmt.Println(&quot;hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><p>效果为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func HelloWorld()&#123;</span><br><span class="line">    fmt.Println(&quot;hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><a href="https://nsq.io/deployment/installing.html" target="_blank" rel="noopener">下载</a>解压<br>解压出来的bin目录地址添加到环境变量</p>
+<h3 id="在golang中使用"><a href="#在golang中使用" class="headerlink" title="在golang中使用"></a>在golang中使用</h3><h5 id="启动nsq"><a href="#启动nsq" class="headerlink" title="启动nsq:"></a>启动nsq:</h5><p>运行Nsq服务集群<br>首先启动nsqlookud(相当于一个nsqd的容器)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsqlookupd (nsqd可以通过<span class="string">"127.0.0.1:4160"</span>接入, nsqadmin可以通过<span class="string">"127.0.0.1:4161"</span>接入)</span><br></pre></td></tr></table></figure></p>
+<p>启动nsqd，并接入刚刚启动的nsqlookud。这里为了方便接下来的测试，启动了两个nsqd<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nsqd --lookupd-tcp-address=127.0.0.1:4160 (<span class="string">"4160"</span>是nsqlookup的默认端口)</span><br><span class="line">nsqd --lookupd-tcp-address=127.0.0.1:4160 -tcp-address=0.0.0.0:4152 -http-address=0.0.0.0:4153</span><br></pre></td></tr></table></figure></p>
+<p>启动nqsadmin,并接入刚刚启动的nsqlookud.<br>nsqadmin –lookupd-http-address=127.0.0.1:4161</p>
+<h5 id="生产端"><a href="#生产端" class="headerlink" title="生产端:"></a>生产端:</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">    add := <span class="string">"127.0.0.1:8080"</span></span><br><span class="line">    InitProducer(add)</span><br><span class="line">    data:= &amp;struct&#123;</span><br><span class="line">        name:<span class="string">"张三"</span>,</span><br><span class="line">        sex:<span class="string">"男"</span>,</span><br><span class="line">    &#125;&#123;&#125;</span><br><span class="line">    strData, _ := json.Marshal(&amp;data)    //把结构体转成json字符串</span><br><span class="line">    Public(<span class="string">"topic"</span>,data) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 初始化生产者</span><br><span class="line">func InitProducer(add string) &#123;</span><br><span class="line">    var err error</span><br><span class="line">    fmt.Println(<span class="string">"address: "</span>, add)</span><br><span class="line">    producer, err = nsq.NewProducer(add, nsq.NewConfig())</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">     panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//发布消息</span><br><span class="line">func Publish(topic string, message string) error &#123;</span><br><span class="line">    var err error</span><br><span class="line">    <span class="keyword">if</span> producer != nil &#123;</span><br><span class="line">    <span class="keyword">if</span> message == <span class="string">""</span> &#123; //不能发布空串，否则会导致error</span><br><span class="line">        <span class="built_in">return</span> nil</span><br><span class="line">    &#125;</span><br><span class="line">    err = producer.Publish(topic, []byte(message)) // 发布消息</span><br><span class="line">        <span class="built_in">return</span> err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> fmt.Errorf(<span class="string">"producer is nil"</span>, err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="消费端-另一个项目"><a href="#消费端-另一个项目" class="headerlink" title="消费端(另一个项目):"></a>消费端(另一个项目):</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">// 消费者</span><br><span class="line"><span class="built_in">type</span> ConsumerT struct&#123;&#125;</span><br><span class="line"></span><br><span class="line">// 主函数</span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    InitConsumer(<span class="string">"test"</span>, <span class="string">"test-channel"</span>, <span class="string">"127.0.0.1:4161"</span>)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        time.Sleep(time.Second * 10)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//处理消息</span><br><span class="line">func (*ConsumerT) HandleMessage(msg *nsq.Message) error &#123;</span><br><span class="line">    fmt.Println(<span class="string">"receive"</span>, msg.NSQDAddress, <span class="string">"message:"</span>, string(msg.Body))</span><br><span class="line">    req:= &amp;struct&#123;</span><br><span class="line">        name string</span><br><span class="line">        sex string</span><br><span class="line">    &#125;&#123;&#125;</span><br><span class="line">    json.Unmarshal(msg.Body, &amp;req)</span><br><span class="line">    <span class="built_in">return</span> nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//初始化消费者</span><br><span class="line">func InitConsumer(topic string, channel string, address string) &#123;</span><br><span class="line">    cfg := nsq.NewConfig()</span><br><span class="line">    cfg.LookupdPollInterval = time.Second          //设置重连时间</span><br><span class="line">    c, err := nsq.NewConsumer(topic, channel, cfg) // 新建一个消费者</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">    c.SetLogger(nil, 0)        //屏蔽系统日志</span><br><span class="line">    c.AddHandler(&amp;ConsumerT&#123;&#125;) // 添加消费者接口</span><br><span class="line"></span><br><span class="line">    //建立NSQLookupd连接(<span class="string">"NSQLookupd"</span>连接以后,就可以通过<span class="string">"4161"</span>端口对产看ui页面)</span><br><span class="line">    <span class="keyword">if</span> err := c.ConnectToNSQLookupd(address); err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">    //建立nsqd连接(可以多个, 接收生产端的消息) </span><br><span class="line">    <span class="keyword">if</span> err := c.ConnectToNSQDs([]string&#123;<span class="string">"127.0.0.1:8080"</span>&#125;); err != nil &#123;</span><br><span class="line">      panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/markdown语法/" data-id="cjo43lr840006ngnocw2myd0q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/nsq使用/" data-id="cjo5dqerg0007iwno03iqj5ui" class="article-share-link">Share</a>
       
       
     </footer>
@@ -672,7 +579,7 @@ __double underscores__
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -684,6 +591,14 @@ __double underscores__
       <ul>
         
           <li>
+            <a href="/2018/11/05/mongodb使用/">mongodb使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/05/go_utils/">golang常用api</a>
+          </li>
+        
+          <li>
             <a href="/2018/11/05/truffle框架开发新代币/">truffle框架开发新代币</a>
           </li>
         
@@ -693,14 +608,6 @@ __double underscores__
         
           <li>
             <a href="/2018/11/02/docker使用/">docker 使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/01/nsq使用/">nsq使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/01/Git 和 github 使用/">Git 和 github 使用</a>
           </li>
         
       </ul>
