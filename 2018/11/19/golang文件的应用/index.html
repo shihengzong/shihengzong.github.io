@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Seeu&#39;s Blog">
 <meta property="og:description" content="导包123456import (	&quot;fmt&quot;	&quot;io&quot;	&quot;io/ioutil&quot;	&quot;os&quot;) 判断是否出现错误errfunc CheckErr(err error) {    if err != nil {        fmt.Println(err.Error())    }} 判断文件是否存在12345678910/** * 判断文件是否存在  存在返回 true 不存在返回false */f">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-19T07:04:46.665Z">
+<meta property="og:updated_time" content="2018-11-19T07:31:17.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang文件的应用">
 <meta name="twitter:description" content="导包123456import (	&quot;fmt&quot;	&quot;io&quot;	&quot;io/ioutil&quot;	&quot;os&quot;) 判断是否出现错误errfunc CheckErr(err error) {    if err != nil {        fmt.Println(err.Error())    }} 判断文件是否存在12345678910/** * 判断文件是否存在  存在返回 true 不存在返回false */f">
@@ -107,11 +107,12 @@ ga('send', 'pageview');
 <h4 id="判断文件是否存在"><a href="#判断文件是否存在" class="headerlink" title="判断文件是否存在"></a>判断文件是否存在</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 判断文件是否存在  存在返回 <span class="literal">true</span> 不存在返回<span class="literal">false</span></span><br><span class="line"> */</span><br><span class="line">func checkFileIsExist(filename string) bool &#123;</span><br><span class="line">	var exist = <span class="literal">true</span></span><br><span class="line">	<span class="keyword">if</span> _, err := os.Stat(filename); os.IsNotExist(err) &#123;</span><br><span class="line">		exist = <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> exist</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="创建一个文件并写入内容"><a href="#创建一个文件并写入内容" class="headerlink" title="创建一个文件并写入内容"></a>创建一个文件并写入内容</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">CreatFile</span></span>() &#123;</span><br><span class="line">	f, err := os.Create(<span class="string">"hello_world.txt"</span>)</span><br><span class="line">	defer f.Close()</span><br><span class="line">	<span class="keyword">if</span> err != nil &#123;</span><br><span class="line">		fmt.Println(err.Error())</span><br><span class="line">		<span class="built_in">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	_, err = f.Write([]byte(<span class="string">"Hello World !\n"</span>))</span><br><span class="line">	_, err = f.Write([]byte(<span class="string">"How are you ?\n"</span>))</span><br><span class="line">	CheckErr(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="获取文件的内容"><a href="#获取文件的内容" class="headerlink" title="获取文件的内容"></a>获取文件的内容</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">OpenFiles</span></span>() &#123;</span><br><span class="line">	fileName := <span class="string">"hello_world.txt"</span></span><br><span class="line">	f, err := os.OpenFile(fileName, os.O_RDONLY, 0600)</span><br><span class="line">	<span class="keyword">if</span> err != nil &#123;</span><br><span class="line">		fmt.Println(err.Error())</span><br><span class="line">		<span class="built_in">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	defer f.Close()</span><br><span class="line">	cByte, err := ioutil.ReadAll(f)</span><br><span class="line">	CheckErr(err)</span><br><span class="line">	fmt.Println(string(cByte))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">file := <span class="string">"hello_world.txt"</span>                   //源文件路径</span><br><span class="line">err := os.Remove(file)               //删除文件test.txt</span><br><span class="line"><span class="keyword">if</span> err != nil &#123;</span><br><span class="line">    //如果删除失败则输出 file remove Error!</span><br><span class="line">    fmt.Println(<span class="string">"file remove Error!"</span>)</span><br><span class="line">    //输出错误详细信息</span><br><span class="line">    fmt.Printf(<span class="string">"%s"</span>, err)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    //如果删除成功则输出 file remove OK!</span><br><span class="line">    fmt.Print(<span class="string">"file remove OK!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="综合示例"><a href="#综合示例" class="headerlink" title="综合示例"></a>综合示例</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">FileOSTest</span></span>() &#123;</span><br><span class="line">	var wireteString = <span class="string">"I'm fine. Thank you. And you ?"</span></span><br><span class="line">	var filename = <span class="string">"./hello_world.txt"</span></span><br><span class="line">	var f *os.File</span><br><span class="line">	var err1 error</span><br><span class="line">	// 使用 io.WriteString 写入文件 </span><br><span class="line">	<span class="keyword">if</span> checkFileIsExist(filename) &#123; //如果文件存在</span><br><span class="line">		f, err1 = os.OpenFile(filename, os.O_APPEND, 0666) //打开文件</span><br><span class="line">		fmt.Println(<span class="string">"文件存在"</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		f, err1 = os.Create(filename) //创建文件</span><br><span class="line">		fmt.Println(<span class="string">"文件不存在"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	check(err1)</span><br><span class="line">	n, err1 := io.WriteString(f, wireteString) //写入文件(字符串)</span><br><span class="line">	check(err1)</span><br><span class="line">	fmt.Printf(<span class="string">"写入 %d 个字节\n"</span>, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/19/golang文件的应用/" data-id="cjonzndze000014no8w6boeqy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/19/golang文件的应用/" data-id="cjonznysf0004d4nojbjhlqx4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -121,9 +122,9 @@ ga('send', 'pageview');
 <nav id="article-nav">
   
   
-    <a href="/2018/11/05/go_utils/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/11/05/truffle框架开发新代币/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">golang常用api</div>
+      <div class="article-nav-title">truffle框架开发新代币</div>
     </a>
   
 </nav>
@@ -161,11 +162,11 @@ ga('send', 'pageview');
           </li>
         
           <li>
-            <a href="/2018/11/05/go_utils/">golang常用api</a>
+            <a href="/2018/11/05/truffle框架开发新代币/">truffle框架开发新代币</a>
           </li>
         
           <li>
-            <a href="/2018/11/05/truffle框架开发新代币/">truffle框架开发新代币</a>
+            <a href="/2018/11/05/go_utils/">golang常用api</a>
           </li>
         
           <li>
