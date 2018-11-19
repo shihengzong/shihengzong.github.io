@@ -78,6 +78,46 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-http请求方式" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/01/http请求方式/" class="article-date">
+  <time datetime="2018-11-01T03:45:14.000Z" itemprop="datePublished">2018-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/01/http请求方式/">http请求方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Get请求"><a href="#1-Get请求" class="headerlink" title="1. Get请求"></a>1. Get请求</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">httpGet</span></span>() &#123;</span><br><span class="line">    resp, err := http.Get(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        // handle error</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    defer resp.Body.Close()</span><br><span class="line">    body, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        // handle error</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    fmt.Println(string(body))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-Post请求"><a href="#2-Post请求" class="headerlink" title="2. Post请求"></a>2. Post请求</h3><h4 id="json形式"><a href="#json形式" class="headerlink" title="json形式"></a>json形式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">httpPost</span></span>() &#123;</span><br><span class="line">    data :=`name:<span class="string">"zhangsan"</span>`</span><br><span class="line">    resp, err := http.Post(<span class="string">"http://www.baidu.com"</span>,</span><br><span class="line">        <span class="string">"application/x-www-form-urlencoded"</span>,</span><br><span class="line">        strings.NewReader(data))</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        fmt.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    defer resp.Body.Close()</span><br><span class="line">    body, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        // handle error</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    fmt.Println(string(body))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Tips：使用这个方法的话，第二个参数要设置成”application-x-www-form-urlencoded”，否则post参数无法传递。"><a href="#Tips：使用这个方法的话，第二个参数要设置成”application-x-www-form-urlencoded”，否则post参数无法传递。" class="headerlink" title="Tips：使用这个方法的话，第二个参数要设置成”application/x-www-form-urlencoded”，否则post参数无法传递。"></a>Tips：使用这个方法的话，第二个参数要设置成”application/x-www-form-urlencoded”，否则post参数无法传递。</h5><h4 id="表单形式"><a href="#表单形式" class="headerlink" title="表单形式"></a>表单形式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">httpPostForm</span></span>() &#123;</span><br><span class="line">    resp, err := http.PostForm(<span class="string">"http://www.baidu.com"</span>,</span><br><span class="line">        url.Values&#123;<span class="string">"key"</span>: &#123;<span class="string">"Value"</span>&#125;, <span class="string">"id"</span>: &#123;<span class="string">"123"</span>&#125;&#125;)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        // handle error</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    defer resp.Body.Close()</span><br><span class="line">    body, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        // handle error</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    fmt.Println(string(body))</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-复杂的请求"><a href="#2-复杂的请求" class="headerlink" title="2. 复杂的请求"></a>2. 复杂的请求</h3><p>有时需要在请求的时候设置头参数、cookie之类的数据，就可以使用http.Do方法。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">func <span class="function"><span class="title">httpDo</span></span>() &#123;</span><br><span class="line">    client := &amp;http.Client&#123;&#125;</span><br><span class="line"> </span><br><span class="line">    req, err := http.NewRequest(<span class="string">"POST"</span>, <span class="string">"http://www.baidu.com"</span>, strings.NewReader(<span class="string">"name=cjb"</span>))</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        // handle error</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    req.Header.Set(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>)</span><br><span class="line">    req.Header.Set(<span class="string">"Cookie"</span>, <span class="string">"name=anny"</span>)</span><br><span class="line"> </span><br><span class="line">    resp, err := client.Do(req)</span><br><span class="line"> </span><br><span class="line">    defer resp.Body.Close()</span><br><span class="line"> </span><br><span class="line">    body, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        // handle error</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    fmt.Println(string(body))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/01/http请求方式/" data-id="cjo9rcfmv00079onon5q4suyq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-golang安装与使用" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/01/golang安装与使用/" class="article-date">
@@ -113,7 +153,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/01/golang安装与使用/" data-id="cjo5dqer20003iwnooqfco6t0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/01/golang安装与使用/" data-id="cjo9rcfmq00049ono4yfzi4s5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +202,7 @@ nginx -s stop
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjo5dqerh0009iwno96nmyv6a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/30/nginx基本使用/" data-id="cjo9rcfmz00099ono8e980lle" class="article-share-link">Share</a>
       
       
     </footer>
@@ -291,7 +331,7 @@ __double underscores__
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/markdown语法/" data-id="cjo5dqerg0008iwnop6sn53di" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/29/markdown语法/" data-id="cjo9rcfn0000a9onoqc70nqv8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -336,7 +376,7 @@ __double underscores__
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/29/hello-world/" data-id="cjo5dqerc0005iwnoa9g1x88t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/29/hello-world/" data-id="cjo9rcfmw00089onom1ggsxoz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -365,7 +405,7 @@ __double underscores__
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -377,7 +417,7 @@ __double underscores__
       <ul>
         
           <li>
-            <a href="/2018/11/05/mongodb使用/">mongodb使用</a>
+            <a href="/2018/11/19/golang文件的应用/">golang文件的应用</a>
           </li>
         
           <li>
@@ -389,11 +429,11 @@ __double underscores__
           </li>
         
           <li>
-            <a href="/2018/11/05/grpc的使用/">grpc安装与使用</a>
+            <a href="/2018/11/05/mongodb使用/">mongodb使用</a>
           </li>
         
           <li>
-            <a href="/2018/11/02/docker使用/">docker 使用</a>
+            <a href="/2018/11/05/grpc的使用/">grpc安装与使用</a>
           </li>
         
       </ul>
